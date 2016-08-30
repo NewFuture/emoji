@@ -1,2 +1,10 @@
-# the template of comit message hook `$EMOJI` is a random emoji 
+#!/bin/sh
+##:: the template of commit-msg hook
+##:: {{}} is template vars
+##:: commmet start with ##::
+EMOJI=$({{SHUF_ONE}}<<'EMOJIS'
+{{EMOJIS}}
+EMOJIS
+);
+
 echo "$EMOJI $(cat $1)" > $1
