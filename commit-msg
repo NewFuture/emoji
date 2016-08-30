@@ -6,5 +6,4 @@ EMOJI=$({{SHUF_ONE}}<<'EMOJIS'
 {{EMOJIS}}
 EMOJIS
 );
-
-echo "$EMOJI $(cat $1)" > $1
+echo "$EMOJI $(cat $1)" >$1

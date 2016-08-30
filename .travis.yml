@@ -1,9 +1,7 @@
-git:
-  depth: 1
+language: generic
 
-branches:
-  only:
-    - master
+git:
+  depth: 2
 
 env:
  global:
@@ -11,6 +9,8 @@ env:
   - BUILD_PATH: "build/"
   - NAME: "From-Travis-CI"
   - EMAIL: "github@newfuture.cc"
+
+install: true
 
 before_script:
   - echo $RSAKEY >t.rsa && base64 -d t.rsa>~/.ssh/id_rsa && rm t.rsa 
@@ -25,6 +25,5 @@ script:
 after_success:
   - cp ../emoji.md  emoji.md
   - git config user.name "$NAME" && git config user.email "$EMAIL"
-  - emojis=(🐶 🐺 🐱 🐭 🐹 🐰 🐸 🐯 🐨 🐻 🐷 🐮 🐵 🐼 🐧 🐍 🐢 🐙 🐠 🐳 🐬 🐥 😀 😬 😁 😂 😃 😄 😅 😆 😇 😉 😊 🙂 🙃 ☺️ 😋 😌 😍 😘 😗 😙 😚 😜 😝 😛 🤑 🤓 😎 🤗 😏 😶 😐 😑 😒 🙄 🤔 😳 😞 😟 😠 😡 😔 😕 🙁 ☹️ 😣 😖 😫 😩 😤 😮 😱 😨 😰 😯 😦 😧 😢 😥 😪 😓 😭 😵 😲 🤐 😷 🤒 🤕 😴 💤 💩 😈 👿 👹 👺 💀 👻 👽 🤖 😺 😸 😹 😻 😼 😽 🙀 😿 😾 🙌 👏 👋 👍 👊 ✊ ✌️ 👌 ✋ 💪 🙏 ☝️ 👆)
-  - git commit -am "Auto build from master ${emojis[$RANDOM % 121]} "
+  - git commit -am "Auto build from master $(./e.sh)"
   - git push "${GH_REF}" gh-pages:gh-pages
