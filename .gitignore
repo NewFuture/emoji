@@ -5,7 +5,6 @@ __pycache__/
 build.sh
 commit-msg
 .gitattributes
-.travis.yml
 
 # C extensions
 *.so

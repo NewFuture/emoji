@@ -1,0 +1,28 @@
+language: generic
+
+os:
+  - linux
+  - osx
+
+git:
+  depth: 3
+
+env:
+ global:
+  - NAME: "tester"
+  - EMAIL: "github@newfuture.cc"
+
+install: true
+
+before_script:
+  - git config user.name "$NAME" && git config user.email "$EMAIL"
+  - touch test && git add.
+
+script:
+  - ./e.sh
+  - ./c.sh
+  - curl -sL https://newfuture.github.io/emoji/e.sh|bash
+  - git commit -am "test cript from master $(./e.sh)"
+
+after_script:
+    - git log -1
