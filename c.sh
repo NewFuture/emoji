@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 COMMIT_MSG='.git/hooks/commit-msg'
-cat >$COMMIT_MSG<<'COMMIT'
+cat >"$COMMIT_MSG"<<'COMMIT'
 #!/bin/sh
 EMOJI=$(shuf -n1<<'EMOJIS'
 :+1:
@@ -872,4 +872,4 @@ EMOJIS
 echo "$EMOJI $(cat $1)" > $1
 
 COMMIT
-chmod +x $COMMIT_MSG
+chmod +x "$COMMIT_MSG"
