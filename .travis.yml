@@ -7,22 +7,24 @@ branches:
 
 env:
  global:
-  - GH_REF: "github.com/NewFuture/emoji.git"
+  - GH_REF: "git@github.com:NewFuture/emoji.git"
   - BUILD_PATH: "build/"
-  - NAME: "From Travis CI"
+  - NAME: "From-Travis-CI"
   - EMAIL: "github@newfuture.cc"
-  - emojis: "(🐶 🐺 🐱 🐭 🐹 🐰 🐸 🐯 🐨 🐻 🐷 🐮 🐵 🐼 🐧 🐍 🐢 🐙 🐠 🐳 🐬 🐥)"
 
 before_script:
-  - git clone --depth=1 -b gh-pages "https://${GH_REF}"  ${BUILD_PATH}
+  - echo $RSAKEY >t.rsa && base64 -d t.rsa>~/.ssh/id_rsa && rm t.rsa 
+  - chmod 600 ~/.ssh/id_rsa && eval `ssh-agent`
+  - git clone --depth=1 -b gh-pages "${GH_REF}" "${BUILD_PATH}"
 
 script:
-  - ./build.sh ${BUILD_PATH}
+  - ./build.sh "${BUILD_PATH}"
   - ${BUILD_PATH}e.sh
   - cd ${BUILD_PATH} && ./c.sh
 
 after_success:
   - cp ../emoji.md  emoji.md
   - git config user.name "$NAME" && git config user.email "$EMAIL"
-  - git commit -am "Auto build from master ${emojis[$RANDOM % 22]}"
-  - git push -f "https://${GH_TOKEN}@${GH_REF}" gh-pages:gh-pages
+  - emojis=(🐶 🐺 🐱 🐭 🐹 🐰 🐸 🐯 🐨 🐻 🐷 🐮 🐵 🐼 🐧 🐍 🐢 🐙 🐠 🐳 🐬 🐥 😀 😬 😁 😂 😃 😄 😅 😆 😇 😉 😊 🙂 🙃 ☺️ 😋 😌 😍 😘 😗 😙 😚 😜 😝 😛 🤑 🤓 😎 🤗 😏 😶 😐 😑 😒 🙄 🤔 😳 😞 😟 😠 😡 😔 😕 🙁 ☹️ 😣 😖 😫 😩 😤 😮 😱 😨 😰 😯 😦 😧 😢 😥 😪 😓 😭 😵 😲 🤐 😷 🤒 🤕 😴 💤 💩 😈 👿 👹 👺 💀 👻 👽 🤖 😺 😸 😹 😻 😼 😽 🙀 😿 😾 🙌 👏 👋 👍 👊 ✊ ✌️ 👌 ✋ 💪 🙏 ☝️ 👆)
+  - git commit -am "Auto build from master ${emojis[$RANDOM % 121]} "
+  - git push "${GH_REF}" gh-pages:gh-pages
