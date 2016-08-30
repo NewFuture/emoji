@@ -25,7 +25,7 @@ OUTPUT=$1'c.sh'
 cat > $OUTPUT <<'BUILD'
 #!/usr/bin/env bash
 COMMIT_MSG='.git/hooks/commit-msg'
-cat >$COMMIT_MSG<<'COMMIT'
+cat >"$COMMIT_MSG"<<'COMMIT'
 #!/bin/sh
 EMOJI=$(shuf -n1<<'EMOJIS'
 BUILD
@@ -43,7 +43,7 @@ cat 'commit-msg'>>$OUTPUT
 cat >> $OUTPUT <<'BUILD'
 
 COMMIT
-chmod +x $COMMIT_MSG
+chmod +x "$COMMIT_MSG"
 BUILD
 
 chmod +x $OUTPUT
