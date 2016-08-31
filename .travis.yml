@@ -7,6 +7,11 @@ os:
 git:
   depth: 3
 
+branches:
+  only:
+  - master
+  - gh-pages
+
 env:
  global:
   - NAME: "tester"
@@ -16,13 +21,17 @@ install: true
 
 before_script:
   - git config user.name "$NAME" && git config user.email "$EMAIL"
-  - touch test && git add.
+  - touch test && git add --all
 
 script:
   - ./e.sh
   - ./c.sh
   - curl -sL https://newfuture.github.io/emoji/e.sh|bash
   - git commit -am "test cript from master $(./e.sh)"
+  - bash -c 'git log -1|grep "^\s*:.*:.*:.*:\s*$"; exit $?'
+
+after_failure:
+  - cat .git/hooks/commit-msg
 
 after_script:
-    - git log -1
+  - git log -1
