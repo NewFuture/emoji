@@ -1,4 +1,4 @@
-language: generic
+language: bash
 
 branches:
   only:
@@ -10,25 +10,29 @@ git:
 
 env:
  global:
+  - GIT_AUTHOR_NAME: "NewFuture"
   - GH_REF: "git@github.com:NewFuture/emoji.git"
   - BUILD_PATH: "build/"
-  - NAME: "From-Travis-CI"
-  - EMAIL: "github@newfuture.cc"
+  - GIT_REF: "NewFuture/WWOF.git"
+  - GIT_AUTHOR_EMAIL:  "${GIT_AUTHOR_NAME}@users.noreply.github.com"
+  - GIT_COMMITTER_NAME: "${GIT_AUTHOR_NAME}"
+  - GIT_COMMITTER_EMAIL: "${GIT_COMMITTER_NAME}@users.noreply.github.com"
 
 install: true
 
 before_script:
-  - echo $RSAKEY >t.rsa && base64 -d t.rsa>~/.ssh/id_rsa && rm t.rsa 
-  - chmod 600 ~/.ssh/id_rsa && eval `ssh-agent`
+  - base64 -d <<< $RSAKEY > ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
   - git clone --depth=1 -b gh-pages "${GH_REF}" "${BUILD_PATH}"
 
 script:
   - ./build.sh "${BUILD_PATH}"
   - ${BUILD_PATH}e.sh
   - cd ${BUILD_PATH} && ./c.sh
+  - for S in *.sh;do bash $S;done
+  - for S in *.sh;do sh $S;done
 
 after_success:
-  - cp ../emoji.md  emoji.md
-  - git config user.name "$NAME" && git config user.email "$EMAIL"
-  - git commit -am "Auto build from master $(./e.sh)"
-  - git push "${GH_REF}" gh-pages:gh-pages
+  - git checkout origin/${TRAVIS_BRANCH} emoji.md
+  - git commit -am "Auto build $(./e.sh)"
+    && git push -f "${GH_REF}" gh-pages:gh-pages

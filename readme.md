@@ -1,4 +1,4 @@
-Random github emoji :octocat:
+:octocat: Random github emoji :octocat:
 ======================
 It's only works on *nix (Linux, MacOS or Windows bash)
 
@@ -8,8 +8,8 @@ It's only works on *nix (Linux, MacOS or Windows bash)
 --------
 in your git project folder run this command at once~
 ```bash
-curl -#L https://newfuture.github.io/emoji/c.sh|bash
-``` 
+curl -#L https://newfuture.github.io/emoji/c.sh|sh
+```
 it will auto prepend a random emoji at the commit message,when you `git commit` every time.
 
 
@@ -17,8 +17,8 @@ it will auto prepend a random emoji at the commit message,when you `git commit` 
 --------
 just run this command
 ```bash
-curl -sL https://newfuture.github.io/emoji/e.sh|bash
-``` 
+curl -sL https://newfuture.github.io/emoji/e.sh|sh
+```
 
 
 :eyes: [All github emoji](emoji.md)
@@ -27,4 +27,4 @@ curl -sL https://newfuture.github.io/emoji/e.sh|bash
 
 you can just add a new line with a new emoji.
 
-it will auto build the script immediately. 
+it will auto build the script immediately.
