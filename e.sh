@@ -209,7 +209,6 @@ perl -MList::Util=shuffle -e 'print @{[shuffle<>]}[0];'<<'EMOJIS'
 :corn:
 :couple:
 :couple_with_heart:
-:couplekiss:
 :cow:
 :cow2:
 :credit_card:
