@@ -8,7 +8,7 @@ It's only works on *nix (Linux, MacOS or Windows bash)
 --------
 in your git project folder run this command at once~
 ```bash
-curl -#L https://newfuture.github.io/emoji/c.sh|sh
+curl -#L https://newfuture.cc/emoji/c.sh|sh
 ```
 it will auto prepend a random emoji at the commit message,when you `git commit` every time.
 
@@ -17,7 +17,7 @@ it will auto prepend a random emoji at the commit message,when you `git commit` 
 --------
 just run this command
 ```bash
-curl -sL https://newfuture.github.io/emoji/e.sh|sh
+curl -sL https://newfuture.cc/emoji/e.sh|sh
 ```
 
 
